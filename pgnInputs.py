@@ -1,4 +1,3 @@
-
 # Valid input
 inputOne = '[Event "Mannheim"] ' \
            '[Site "Mannheim GER"]' \
@@ -18,13 +17,13 @@ inputOne = '[Event "Mannheim"] ' \
            '8. Nh3 {! The short-stepping knight is always brought as near as possible to' \
            'the actual battle field. Therefore White does not make the plausible move 8 Nf3' \
            'but 8 Nh3 so as to get the knight to f4.} 8... Qe7 9. Nf4 Nf8 10. Qg4 f5 {The' \
-           'only move. Not only was 11 Qxg7 threatened but also Nxd5.} 11. exf6 gxf6 12.' \
-           'O-O-O {He again threatens Nxd5.} 12... c6 13. Re1 Kd8 14. Rh6 e5 15. Qh4 Nbd7' \
+           'only move. Not only was 11 Qxg7 threatened but also Nxd5.} 11. exf6 gxf6 12. ' \
+           'O-O-O {He again threatens Nxd5.} 12... c6 13. Re1 Kd8 14. Rh6 e5 15. Qh4 Nbd7 ' \
            '16. Bd3 e4 17. Qg3 Qf7 {Forced - the sacrifice of the knight at d5 was' \
-           'threatened and after 17...Qd6 18 Bxe4 dxe4 19 Rxe4 and 20 Qg7 wins.} 18. Bxe4' \
+           'threatened and after 17...Qd6 18 Bxe4 dxe4 19 Rxe4 and 20 Qg7 wins.} 18. Bxe4 ' \
            'dxe4 19. Nxe4 Rg8 20. Qa3 {Here, as so often happens, a surprising move and one' \
            'difficult to have foreseen, forms the kernel of an apparently simple Alekhine' \
-           'combination.} 20... Qg7 {After 20.Qe7 21.Qa5+ b6 22.Qc3 would follow.} 21.' \
+           'combination.} 20... Qg7 {After 20.Qe7 21.Qa5+ b6 22.Qc3 would follow.} 21. ' \
            'Nd6 Nb6 22. Ne8 Qf7 {White mates in three moves.} 23. Qd6+ 1-0'
 
 # Invalid input
@@ -34,7 +33,7 @@ inputTwo = '1. e4 e4 3. e5 e5 4. e4 0-1'
 inputThree = '1. e4 e5 { Nf3 1-0'
 
 # Valid input
-inputFour = "1. e4 e5 2. Nf3 { Nh3 it's considered bad } 2... Nc6 1/2-1/2"
+inputFour = "1. e4 e5 2... Nf3 { Nh3 it's considered bad } 2... Nc6 1/2-1/2"
 
 # Valid input
 inputFive = '[a "b"]' \

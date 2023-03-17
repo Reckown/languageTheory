@@ -1,20 +1,17 @@
-import sys
 import ply.lex as lex
 
 from regExConstants import REGEX_END_GAME, REGEX_TURN, REGEX_TURN_SECOND, REGEX_ROC_LONG, REGEX_ROC_SHORT, \
     REGEX_DESCRIPTORS, REGEX_COMMENTARY, REGEX_ACTION
 
 
-def createLexer():
+class Lexer:
     # List of token names.
-    tokens = ['VICTORY', 'TURN', 'TURN_RECOVERY', 'LONG_CASTLE', 'SHORT_CASTLE',
-              'MOVE', 'HEADER', 'COMMENTARY']
     # Regular expression rules for simple tokens
     t_VICTORY = REGEX_END_GAME
 
     t_TURN = REGEX_TURN
 
-    TURN_RECOVERY = REGEX_TURN_SECOND
+    t_TURN_RECOVERY = REGEX_TURN_SECOND
 
     t_LONG_CASTLE = REGEX_ROC_LONG
 
@@ -28,11 +25,44 @@ def createLexer():
 
     t_ignore = ' \t'
 
-    # Error handling rule
-    def t_error(t):
-        if t.lexpos < len(t.value):
-            print("Illegal character '%s'" % t.value[t.lexpos], file=sys.stderr)
-        t.lexer.skip(1)
+    tokens = ['VICTORY', 'TURN', 'TURN_RECOVERY', 'LONG_CASTLE', 'SHORT_CASTLE',
+              'MOVE', 'HEADER', 'COMMENTARY']
 
-    lexer = lex.lex()
-    return lexer
+    # Error handling rule
+    def t_error(self, t):
+        print(f'Illegal character {t.value[0]!r}')
+        if self.lastErrorPos is None:
+            self.lastErrorPos = t.lexpos
+            self.lastErrorLine = t.lineno
+            self.error.append(t.value[0])
+        else:
+            if self.lastErrorPos == t.lexpos-1:
+                self.error[self.numberError] += t.value[0]
+            else:
+                self.numberError = self.numberError + 1
+                self.error[self.numberError] += t.value[0]
+            self.lastErrorPos = t.lexpos
+            self.lastErrorLine = t.lineno
+            t.lexer.skip(1)
+
+    def __init__(self):
+        self.lexer = None
+        self.error = []
+        self.lastErrorPos = None
+        self.lastErrorLine = None
+        self.numberError = 0
+        self.tokenList = []
+
+    def createLexer(self):
+        self.lexer = lex.lex(module=self, )
+
+    # Test it output
+    def test(self, data):
+        self.lexer.input(data)
+        while True:
+            tok = self.lexer.token()
+            self.tokenList.append(tok)
+            if not tok:
+                break
+            print(tok)
+        print(self.tokenList)

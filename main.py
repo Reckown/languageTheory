@@ -1,36 +1,26 @@
 import lexer
 import pgnInputs
+import parser
 from regExTest import testRegEx
 import ply.yacc as yacc
 
 
 def createLexer():
-    lex = lexer.createLexer()
-    # we can run lex() in debug mode as follows:
-    # lexer = lex.lex(debug=True)
-    lex.input(pgnInputs.inputOne)
-    while True:
-        tok = lex.token()
-        print(tok)
-        if not tok: break
-    # Use token
+    lex = lexer.Lexer()
+    lex.createLexer()
+    lex.test(pgnInputs.inputOne)
 
 
 def createParser():
-    lex = lexer.createLexer()
-    # we can run lex() in debug mode as follows:
-    # lexer = lex.lex(debug=True)
-    lex.input(pgnInputs.inputOne)
-    while True:
-        tok = lex.token()
-        print(tok)
-        if not tok: break
+    lex = lexer.Lexer()
+    lex.createLexer()
+    lex.test(pgnInputs.inputOne)
     # Use token
-    parser = yacc.yacc()
-    result = parser.parse(tok)
+    pars = parser.Parser()
+    result = pars.parser.parse(pgnInputs.inputFour)
     print(result)
 
 
 # testRegEx()
-# createLexer()
+#createLexer()
 createParser()
