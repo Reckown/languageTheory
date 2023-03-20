@@ -1,5 +1,5 @@
 import lexer
-import pgnInputs
+import constants.pgnInputs
 import ply.yacc as yacc
 
 

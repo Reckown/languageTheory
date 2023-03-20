@@ -1,8 +1,8 @@
 import lexer
-import pgnInputs
-import parser
-from regExTest import testRegEx
+from constants import pgnInputs
 import ply.yacc as yacc
+from test.lexerTest import test_lexer
+import parser
 
 
 def createLexer():
@@ -22,5 +22,6 @@ def createParser():
 
 
 # testRegEx()
-#createLexer()
+# createLexer()
 createParser()
+# test_lexer()

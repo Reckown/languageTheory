@@ -1,0 +1,411 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> log
+Rule 1     log -> game
+Rule 2     game -> descriptor play result game
+Rule 3     game -> empty
+Rule 4     descriptor -> HEADER descriptor
+Rule 5     descriptor -> empty
+Rule 6     play -> turn play
+Rule 7     play -> empty
+Rule 8     turn -> TURN move_p1 com_p1 move_p2 com_p2
+Rule 9     turn -> empty
+Rule 10    com_p1 -> commentary TURN_RECOVERY
+Rule 11    com_p1 -> empty
+Rule 12    com_p2 -> commentary
+Rule 13    com_p2 -> empty
+Rule 14    commentary -> COMMENTARY
+Rule 15    move_p1 -> MOVE
+Rule 16    move_p1 -> LONG_CASTLE
+Rule 17    move_p1 -> SHORT_CASTLE
+Rule 18    move_p2 -> MOVE
+Rule 19    move_p2 -> LONG_CASTLE
+Rule 20    move_p2 -> SHORT_CASTLE
+Rule 21    result -> VICTORY
+Rule 22    empty -> <empty>
+
+Terminals, with rules where they appear
+
+COMMENTARY           : 14
+HEADER               : 4
+LONG_CASTLE          : 16 19
+MOVE                 : 15 18
+SHORT_CASTLE         : 17 20
+TURN                 : 8
+TURN_RECOVERY        : 10
+VICTORY              : 21
+error                : 
+
+Nonterminals, with rules where they appear
+
+com_p1               : 8
+com_p2               : 8
+commentary           : 10 12
+descriptor           : 2 4
+empty                : 3 5 7 9 11 13
+game                 : 1 2
+log                  : 0
+move_p1              : 8
+move_p2              : 8
+play                 : 2 6
+result               : 2
+turn                 : 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . log
+    (1) log -> . game
+    (2) game -> . descriptor play result game
+    (3) game -> . empty
+    (4) descriptor -> . HEADER descriptor
+    (5) descriptor -> . empty
+    (22) empty -> .
+
+    HEADER          shift and go to state 5
+    $end            reduce using rule 22 (empty -> .)
+    TURN            reduce using rule 22 (empty -> .)
+    VICTORY         reduce using rule 22 (empty -> .)
+
+    log                            shift and go to state 1
+    game                           shift and go to state 2
+    descriptor                     shift and go to state 3
+    empty                          shift and go to state 4
+
+state 1
+
+    (0) S' -> log .
+
+
+
+state 2
+
+    (1) log -> game .
+
+    $end            reduce using rule 1 (log -> game .)
+
+
+state 3
+
+    (2) game -> descriptor . play result game
+    (6) play -> . turn play
+    (7) play -> . empty
+    (8) turn -> . TURN move_p1 com_p1 move_p2 com_p2
+    (9) turn -> . empty
+    (22) empty -> .
+
+  ! shift/reduce conflict for TURN resolved as shift
+    TURN            shift and go to state 9
+    VICTORY         reduce using rule 22 (empty -> .)
+
+  ! TURN            [ reduce using rule 22 (empty -> .) ]
+
+    play                           shift and go to state 6
+    turn                           shift and go to state 7
+    empty                          shift and go to state 8
+
+state 4
+
+    (3) game -> empty .
+    (5) descriptor -> empty .
+
+    $end            reduce using rule 3 (game -> empty .)
+    TURN            reduce using rule 5 (descriptor -> empty .)
+    VICTORY         reduce using rule 5 (descriptor -> empty .)
+
+
+state 5
+
+    (4) descriptor -> HEADER . descriptor
+    (4) descriptor -> . HEADER descriptor
+    (5) descriptor -> . empty
+    (22) empty -> .
+
+    HEADER          shift and go to state 5
+    TURN            reduce using rule 22 (empty -> .)
+    VICTORY         reduce using rule 22 (empty -> .)
+
+    descriptor                     shift and go to state 10
+    empty                          shift and go to state 11
+
+state 6
+
+    (2) game -> descriptor play . result game
+    (21) result -> . VICTORY
+
+    VICTORY         shift and go to state 13
+
+    result                         shift and go to state 12
+
+state 7
+
+    (6) play -> turn . play
+    (6) play -> . turn play
+    (7) play -> . empty
+    (8) turn -> . TURN move_p1 com_p1 move_p2 com_p2
+    (9) turn -> . empty
+    (22) empty -> .
+
+  ! shift/reduce conflict for TURN resolved as shift
+    TURN            shift and go to state 9
+    VICTORY         reduce using rule 22 (empty -> .)
+
+  ! TURN            [ reduce using rule 22 (empty -> .) ]
+
+    turn                           shift and go to state 7
+    play                           shift and go to state 14
+    empty                          shift and go to state 8
+
+state 8
+
+    (7) play -> empty .
+    (9) turn -> empty .
+
+  ! reduce/reduce conflict for VICTORY resolved using rule 7 (play -> empty .)
+    VICTORY         reduce using rule 7 (play -> empty .)
+    TURN            reduce using rule 9 (turn -> empty .)
+
+  ! VICTORY         [ reduce using rule 9 (turn -> empty .) ]
+
+
+state 9
+
+    (8) turn -> TURN . move_p1 com_p1 move_p2 com_p2
+    (15) move_p1 -> . MOVE
+    (16) move_p1 -> . LONG_CASTLE
+    (17) move_p1 -> . SHORT_CASTLE
+
+    MOVE            shift and go to state 16
+    LONG_CASTLE     shift and go to state 17
+    SHORT_CASTLE    shift and go to state 18
+
+    move_p1                        shift and go to state 15
+
+state 10
+
+    (4) descriptor -> HEADER descriptor .
+
+    TURN            reduce using rule 4 (descriptor -> HEADER descriptor .)
+    VICTORY         reduce using rule 4 (descriptor -> HEADER descriptor .)
+
+
+state 11
+
+    (5) descriptor -> empty .
+
+    TURN            reduce using rule 5 (descriptor -> empty .)
+    VICTORY         reduce using rule 5 (descriptor -> empty .)
+
+
+state 12
+
+    (2) game -> descriptor play result . game
+    (2) game -> . descriptor play result game
+    (3) game -> . empty
+    (4) descriptor -> . HEADER descriptor
+    (5) descriptor -> . empty
+    (22) empty -> .
+
+    HEADER          shift and go to state 5
+    $end            reduce using rule 22 (empty -> .)
+    TURN            reduce using rule 22 (empty -> .)
+    VICTORY         reduce using rule 22 (empty -> .)
+
+    descriptor                     shift and go to state 3
+    game                           shift and go to state 19
+    empty                          shift and go to state 4
+
+state 13
+
+    (21) result -> VICTORY .
+
+    HEADER          reduce using rule 21 (result -> VICTORY .)
+    TURN            reduce using rule 21 (result -> VICTORY .)
+    VICTORY         reduce using rule 21 (result -> VICTORY .)
+    $end            reduce using rule 21 (result -> VICTORY .)
+
+
+state 14
+
+    (6) play -> turn play .
+
+    VICTORY         reduce using rule 6 (play -> turn play .)
+
+
+state 15
+
+    (8) turn -> TURN move_p1 . com_p1 move_p2 com_p2
+    (10) com_p1 -> . commentary TURN_RECOVERY
+    (11) com_p1 -> . empty
+    (14) commentary -> . COMMENTARY
+    (22) empty -> .
+
+    COMMENTARY      shift and go to state 23
+    MOVE            reduce using rule 22 (empty -> .)
+    LONG_CASTLE     reduce using rule 22 (empty -> .)
+    SHORT_CASTLE    reduce using rule 22 (empty -> .)
+
+    com_p1                         shift and go to state 20
+    commentary                     shift and go to state 21
+    empty                          shift and go to state 22
+
+state 16
+
+    (15) move_p1 -> MOVE .
+
+    COMMENTARY      reduce using rule 15 (move_p1 -> MOVE .)
+    MOVE            reduce using rule 15 (move_p1 -> MOVE .)
+    LONG_CASTLE     reduce using rule 15 (move_p1 -> MOVE .)
+    SHORT_CASTLE    reduce using rule 15 (move_p1 -> MOVE .)
+
+
+state 17
+
+    (16) move_p1 -> LONG_CASTLE .
+
+    COMMENTARY      reduce using rule 16 (move_p1 -> LONG_CASTLE .)
+    MOVE            reduce using rule 16 (move_p1 -> LONG_CASTLE .)
+    LONG_CASTLE     reduce using rule 16 (move_p1 -> LONG_CASTLE .)
+    SHORT_CASTLE    reduce using rule 16 (move_p1 -> LONG_CASTLE .)
+
+
+state 18
+
+    (17) move_p1 -> SHORT_CASTLE .
+
+    COMMENTARY      reduce using rule 17 (move_p1 -> SHORT_CASTLE .)
+    MOVE            reduce using rule 17 (move_p1 -> SHORT_CASTLE .)
+    LONG_CASTLE     reduce using rule 17 (move_p1 -> SHORT_CASTLE .)
+    SHORT_CASTLE    reduce using rule 17 (move_p1 -> SHORT_CASTLE .)
+
+
+state 19
+
+    (2) game -> descriptor play result game .
+
+    $end            reduce using rule 2 (game -> descriptor play result game .)
+
+
+state 20
+
+    (8) turn -> TURN move_p1 com_p1 . move_p2 com_p2
+    (18) move_p2 -> . MOVE
+    (19) move_p2 -> . LONG_CASTLE
+    (20) move_p2 -> . SHORT_CASTLE
+
+    MOVE            shift and go to state 25
+    LONG_CASTLE     shift and go to state 26
+    SHORT_CASTLE    shift and go to state 27
+
+    move_p2                        shift and go to state 24
+
+state 21
+
+    (10) com_p1 -> commentary . TURN_RECOVERY
+
+    TURN_RECOVERY   shift and go to state 28
+
+
+state 22
+
+    (11) com_p1 -> empty .
+
+    MOVE            reduce using rule 11 (com_p1 -> empty .)
+    LONG_CASTLE     reduce using rule 11 (com_p1 -> empty .)
+    SHORT_CASTLE    reduce using rule 11 (com_p1 -> empty .)
+
+
+state 23
+
+    (14) commentary -> COMMENTARY .
+
+    TURN_RECOVERY   reduce using rule 14 (commentary -> COMMENTARY .)
+    TURN            reduce using rule 14 (commentary -> COMMENTARY .)
+    VICTORY         reduce using rule 14 (commentary -> COMMENTARY .)
+
+
+state 24
+
+    (8) turn -> TURN move_p1 com_p1 move_p2 . com_p2
+    (12) com_p2 -> . commentary
+    (13) com_p2 -> . empty
+    (14) commentary -> . COMMENTARY
+    (22) empty -> .
+
+    COMMENTARY      shift and go to state 23
+    TURN            reduce using rule 22 (empty -> .)
+    VICTORY         reduce using rule 22 (empty -> .)
+
+    com_p2                         shift and go to state 29
+    commentary                     shift and go to state 30
+    empty                          shift and go to state 31
+
+state 25
+
+    (18) move_p2 -> MOVE .
+
+    COMMENTARY      reduce using rule 18 (move_p2 -> MOVE .)
+    TURN            reduce using rule 18 (move_p2 -> MOVE .)
+    VICTORY         reduce using rule 18 (move_p2 -> MOVE .)
+
+
+state 26
+
+    (19) move_p2 -> LONG_CASTLE .
+
+    COMMENTARY      reduce using rule 19 (move_p2 -> LONG_CASTLE .)
+    TURN            reduce using rule 19 (move_p2 -> LONG_CASTLE .)
+    VICTORY         reduce using rule 19 (move_p2 -> LONG_CASTLE .)
+
+
+state 27
+
+    (20) move_p2 -> SHORT_CASTLE .
+
+    COMMENTARY      reduce using rule 20 (move_p2 -> SHORT_CASTLE .)
+    TURN            reduce using rule 20 (move_p2 -> SHORT_CASTLE .)
+    VICTORY         reduce using rule 20 (move_p2 -> SHORT_CASTLE .)
+
+
+state 28
+
+    (10) com_p1 -> commentary TURN_RECOVERY .
+
+    MOVE            reduce using rule 10 (com_p1 -> commentary TURN_RECOVERY .)
+    LONG_CASTLE     reduce using rule 10 (com_p1 -> commentary TURN_RECOVERY .)
+    SHORT_CASTLE    reduce using rule 10 (com_p1 -> commentary TURN_RECOVERY .)
+
+
+state 29
+
+    (8) turn -> TURN move_p1 com_p1 move_p2 com_p2 .
+
+    TURN            reduce using rule 8 (turn -> TURN move_p1 com_p1 move_p2 com_p2 .)
+    VICTORY         reduce using rule 8 (turn -> TURN move_p1 com_p1 move_p2 com_p2 .)
+
+
+state 30
+
+    (12) com_p2 -> commentary .
+
+    TURN            reduce using rule 12 (com_p2 -> commentary .)
+    VICTORY         reduce using rule 12 (com_p2 -> commentary .)
+
+
+state 31
+
+    (13) com_p2 -> empty .
+
+    TURN            reduce using rule 13 (com_p2 -> empty .)
+    VICTORY         reduce using rule 13 (com_p2 -> empty .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for TURN in state 3 resolved as shift
+WARNING: shift/reduce conflict for TURN in state 7 resolved as shift
+WARNING: reduce/reduce conflict in state 8 resolved using rule (play -> empty)
+WARNING: rejected rule (turn -> empty) in state 8
